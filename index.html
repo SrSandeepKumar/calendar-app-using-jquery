@@ -8,39 +8,84 @@
 <body>
 	<center>
 	Select Date
-		<input class="inputField"/> 
-		<div class="container">
+		<input class="inputField1" placeholder="DD-MM-YYYY"/> 
+		<input class="inputField" placeholder="DD-MM-YYYY"/> 
+		
+		<!-- Calendar 1 -->
+		<div class="calendarContainer">
+			<div class="container">
 
-			<table class="tableContainer">
-				<thead class="header">
-					<tr >
-						<tr class="monthYearContainer">
-							<th colspan="6"></th>
-							<th><sup class="close">&#9747;</sup></th>
+				<table class="tableContainer">
+					<thead class="header">
+						<tr >
+							<tr class="monthYearContainer">
+								<th colspan="6"></th>
+								<th><sup class="close">&#9747;</sup></th>
+							</tr>
+							<tr class="weekContainer"></tr>
 						</tr>
-						<tr class="weekContainer">
-							<th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th><th>Su</th>
-						</tr>
-					</tr>
-				</thead>
-			</table>	
-		</div>
-		<div class="bodyContainer">
-			<table class="tableContainer">
-				 <tbody class="tableBody"> </tbody>
+					</thead>
+				</table>	
 			</div>
-			</table>
+			<div class="bodyContainer">
+				<table class="tableContainer">
+					 <tbody class="tableBody"> </tbody>
+				</div>
+				</table>
+			</div>
+		</div>
+
+		<!-- Calendar 2 -->
+		<div class="calendarContainer1">
+			<div class="container">
+
+				<table class="tableContainer">
+					<thead class="header">
+						<tr >
+							<tr class="monthYearContainer">
+								<th colspan="6"></th>
+								<th><sup class="close">&#9747;</sup></th>
+							</tr>
+							<tr class="weekContainer"></tr>
+						</tr>
+					</thead>
+				</table>	
+			</div>
+			<div class="bodyContainer">
+				<table class="tableContainer">
+					 <tbody class="tableBody"> </tbody>
+				</div>
+				</table>
+			</div>
 		</div>
 	</center>
 	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript">
 		var config = {
+			container: $(".calendarContainer"),
 			numOfDays: 180,
-			numOfDiabledRows: 2
+			numOfDiabledRows: 2,
+			weekNames: ["Mo","Tu","We","Th","Fr","Sa","Su"],
+			monthName: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+			monthNumber : {"Jan": "01", "Feb":"02", "Mar":"03", "Apr":"04", "May":"05", "Jun":"06", "Jul":"07", "Aug":"08", "Sep":"09", "Oct":"10", "Nov":"11", "Dec":"12"},
+			inputBoxName: "inputField",
+			disabledDays: ["10Mar2015", "12Mar2015", "14Mar2015","30Mar2015","25Mar2015","03Apr2015", "07Apr2015"]
+		};
+		var config1 = {
+			container: $(".calendarContainer1"),
+			numOfDays: 180,
+			numOfDiabledRows: 2,
+			weekNames: ["Ma","Di","Wo","Do","Vr","Za","Zo"],
+			monthName:["Januari" ,"Februari" ,"Maart" ,"April" ,"Mei" ,"Juni" ,"Juli" ,"Augustus" ,"September" ,"October" ,"November" ,"December"],
+			monthNumber : {"Jan": "01", "Feb":"02", "Maa":"03", "Apr":"04", "Mei":"05", "Jun":"06", "Jul":"07", "Aug":"08", "Sep":"09", "Oct":"10", "Nov":"11", "Dec":"12"},
+			inputBoxName: "inputField1",
+			disabledDays: ["11Mar2015", "13Mar2015", "15Mar2015"]
 		};
 
 		getDates(config);
+		getDates(config1);
 	</script>
+	
 </body>
 </html>

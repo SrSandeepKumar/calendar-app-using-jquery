@@ -9,6 +9,14 @@ body{
 	border-radius: 10%;
 	height: 50px;
 }
+.inputField1{
+	font-family: monospace;
+	font-size: 30px;
+	margin: 50px;
+	width: 500px;
+	border-radius: 10%;
+	height: 50px;
+}
 .container{
 	border: 1px solid white;
 	width: 400px;
@@ -44,7 +52,7 @@ body{
 }
 .weekContainer{
 	height:40px;
-
+	text-align: center;
 }
 .header{
 	background: #E0E0E0;
