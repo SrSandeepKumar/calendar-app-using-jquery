@@ -1,7 +1,8 @@
-$(document).ready(function(){
-		var dNo, dateInfo, week ,month ,date ,year, dateArray = [], curDate, textFieldInfo, textFiledDate, textFiledMonth, textFiledYear, previousScroll;
+var getDates = function(config){
+	$(document).ready(function(){
+		var dNo, dateInfo, week ,month ,date ,year, dateArray = [], curDate, textFieldInfo, textFiledDate, textFiledMonth, textFiledYear, previousScroll, bodyHeight = $(".bodyContainer").height();
 		var currentDate = new Date();
-		var dayNo = 180; dayRows = dayNo/7; 
+		var dayNo = config.numOfDays; dayRows = dayNo/7; 
 		var idInfo = currentDate.toDateString().split(" ");
 		var scrollingTo = idInfo[2]+idInfo[1]+idInfo[3];
 		var monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "Spetember", "October", "November", "December"];
@@ -9,7 +10,7 @@ $(document).ready(function(){
 		
 		$(".monthYearContainer").children()[0].innerHTML = monthName[currentDate.getMonth()] + " " + currentDate.getFullYear();
 		if(currentDate.getDate() < 10){ curDate = "0"+currentDate.getDate()} else { curDate = currentDate.getDate()}
-		$(".inputField").val(curDate +"-"+ MonthNumber[monthName[currentDate.getMonth()].slice(0,3)] +"-"+ currentDate.getFullYear());
+		// $(".inputField").val(curDate +"-"+ MonthNumber[monthName[currentDate.getMonth()].slice(0,3)] +"-"+ currentDate.getFullYear());
 
 		var Tanker = function(){
 			var weeks = {"Mo" : {"date" : [], "prop" : []},"Tu" : {"date" : [], "prop" : []},"We" : {"date" : [], "prop" : []},"Th" : {"date" : [], "prop" : []},"Fr" : {"date" : [], "prop" : []},"Sa" : {"date" : [], "prop" : []},"Su" : {"date" : [], "prop" : []}
@@ -47,33 +48,17 @@ $(document).ready(function(){
 			}
 		}
 
-		for(var u=0; u<dayRows-1;u++){
-			$(".tableBody").append("<tr class='rowCell'><td class='Mo "+ tank.weeks['Mo'].prop[u] +"'>"+ tank.weeks['Mo'].date[u] +"</td><td class='Tu "+ tank.weeks['Tu'].prop[u] +"'>"+ tank.weeks['Tu'].date[u] +"</td><td class='We "+ tank.weeks['We'].prop[u] +"'>"+ tank.weeks['We'].date[u] +"</td><td class='Th "+ tank.weeks['Th'].prop[u] +"'>"+ tank.weeks['Th'].date[u] +"</td><td class='Fr "+ tank.weeks['Fr'].prop[u] +"'>"+ tank.weeks['Fr'].date[u] +"</td><td class='Sa "+ tank.weeks['Sa'].prop[u] +"'>"+ tank.weeks['Sa'].date[u] +"</td><td class='Su "+ tank.weeks['Su'].prop[u] +"'>"+ tank.weeks['Su'].date[u] +"</td></tr>");
+		for(var rowNo=0; rowNo<dayRows-1;rowNo++){
+			$(".tableBody").append("<tr class='rowCell'><td class='Mo "+ tank.weeks['Mo'].prop[rowNo] +"'>"+ tank.weeks['Mo'].date[rowNo] +"</td><td class='Tu "+ tank.weeks['Tu'].prop[rowNo] +"'>"+ tank.weeks['Tu'].date[rowNo] +"</td><td class='We "+ tank.weeks['We'].prop[rowNo] +"'>"+ tank.weeks['We'].date[rowNo] +"</td><td class='Th "+ tank.weeks['Th'].prop[rowNo] +"'>"+ tank.weeks['Th'].date[rowNo] +"</td><td class='Fr "+ tank.weeks['Fr'].prop[rowNo] +"'>"+ tank.weeks['Fr'].date[rowNo] +"</td><td class='Sa "+ tank.weeks['Sa'].prop[rowNo] +"'>"+ tank.weeks['Sa'].date[rowNo] +"</td><td class='Su "+ tank.weeks['Su'].prop[rowNo] +"'>"+ tank.weeks['Su'].date[rowNo] +"</td></tr>");
 		}
 		
-		$("."+scrollingTo).addClass("selectedCellColor");
-
-		// var monthScroller=currentDate.getMonth();
-		// var monthScroller = 2;
-		// $(".bodyContainer").scroll(function(data){
-			
-		// 	$(".monthYearContainer").children()[0].innerHTML = monthName[monthScroller] + " " + currentDate.getFullYear();
-		// 	if(previousScroll < ($(".bodyContainer").scrollTop())){
-		// 		$(".monthYearContainer").children()[0].innerHTML = monthName[monthScroller] + " " + currentDate.getFullYear();
-		// 		monthScroller = monthScroller+1;
-		// 	} else {
-		// 		$(".monthYearContainer").children()[0].innerHTML = monthName[monthScroller] + " " + currentDate.getFullYear();
-		// 		monthScroller = monthScroller-1;
-		// 	}
-		// 	previousScroll = $(".bodyContainer").scrollTop();
-		// });
 
 		$(".tableBody").click(function(data, element){	
-			$("td").removeClass("selectedCellColor");	
+			$("td").removeClass("selectedCellColor");
 			if($(data.target).hasClass("enabled")){
 				toClose = $(data.target);
 				$(data.target).addClass("selectedCellColor");
-				
+				// scrollingTo = 
 				textFieldInfo = $(data.target)[0].className.split(" ")[2];
 				textFiledDate = textFieldInfo.slice(0,2);
 				textFiledMonth = textFieldInfo.slice(2,5);
@@ -85,15 +70,34 @@ $(document).ready(function(){
 		$(".close").click(function(data){
 			$(".container").hide();
 			$(".bodyContainer").hide();
-			// $("td").removeClass("selectedCellColor");
+			// scrollingTo = $(data.target)[0].className.split(" ")[2];
 		});
 
-		$(".bodyContainer").scrollTop($('.'+scrollingTo).offset().top - ($(".bodyContainer").height()/*+40*/));
-		previousScroll = $('.'+scrollingTo).offset().top;
+		$("td")
+		.mouseenter(function(data){
+			$(data.target).addClass("mouseEnter");
+		})
+		.mouseleave(function(data){
+			$(data.target).removeClass("mouseEnter");
+			$("span").removeClass("mouseEnter");
+		});
 
-		$(".inputField").focusin(function(){
+		// $(".bodyContainer").scrollTop($('.'+scrollingTo).offset().top - (($(".bodyContainer").height()-90)+(config.numOfDiabledRows*46)));
+		// previousScroll = $('.'+scrollingTo).offset().top;
+		var flag=true;
+		$(".inputField")
+		.focusin(function(){
 			$(".container").show();
 			$(".bodyContainer").show();
+			$("."+scrollingTo).addClass("selectedCellColor");
+			if(flag){
+			 // $(".inputField").val(curDate +"-"+ MonthNumber[monthName[currentDate.getMonth()].slice(0,3)] +"-"+ currentDate.getFullYear());
+			$(".bodyContainer").scrollTop($('.'+scrollingTo).offset().top - ((bodyHeight-80)+(config.numOfDiabledRows)*40));
+			flag = false;
+			} else {
+				$(".bodyContainer").scrollTop($('.'+scrollingTo).offset().top +(config.numOfDiabledRows)*40);
+			} 	
 		});
 
 	});
+};

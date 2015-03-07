@@ -1,0 +1,100 @@
+body{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.inputField{
+	font-family: monospace;
+	font-size: 30px;
+	margin: 50px;
+	width: 500px;
+	border-radius: 10%;
+	height: 50px;
+}
+.container{
+	border: 1px solid white;
+	width: 400px;
+	height: 85px;
+	box-shadow: 0px 5px 50px #888888;
+	display: none;
+}
+.close{
+	cursor:pointer;
+}
+.bodyContainer{
+	border: 1px solid white;
+	width: 400px;
+	height: 333px;
+	box-shadow: 0px 5px 50px #888888;
+	display: none;
+	overflow-y:scroll; 
+	overflow-x:hidden; 
+}
+.pointer{
+	border-color: white;
+	border-left: 30px solid transparent;
+	border-right: 30px solid transparent;
+	border-bottom: 50px solid red;
+	width: 0px;
+	height: 0px;
+}
+.tableContainer{
+	width: inherit;
+}
+.monthYearContainer{
+	height:40px;
+}
+.weekContainer{
+	height:40px;
+
+}
+.header{
+	background: #E0E0E0;
+}
+.tableBody{
+	background: #EEEEEE;
+	text-align: center;
+	cursor:pointer;
+	overflow-y: auto; 
+	height: 400px;
+}
+.rowCell{
+	height:40px;
+	width:60px;
+}
+div::-webkit-scrollbar {
+	width: 2px;
+}
+.tableContainer::-webkit-scrollbar {
+	width: 2px;
+}
+.disabled{
+	color: #BDBDBD;
+	cursor:default;
+}
+.monthStart{
+	display: block;
+	background: black;
+	color: white;
+}
+.selectedCellColor{
+	background: #421E4E;
+	color: white;
+}
+.Tu{
+	width: 55px;
+}
+.We{
+	width: 65px;
+}
+.Th{
+	width:55px;
+}
+.Mo{
+	width:60px;
+}
+.Sa{
+	width: 45px;
+}
+.mouseEnter{
+	background: #D1BDD8;
+	color: white;
+}
