@@ -1,3 +1,6 @@
+
+The problem statement and the working are in the URL above
+
 ##Index.html
 
 #### Two input fields.
@@ -20,18 +23,7 @@
 
 ##script.js
 
-* Functionalities are discribed by comments in the file
-
----------------------------------------------------------------------------------------------------------------
-
-### Justification
-	|
-	|\_ The widget is built by only using jQuery as insisted, The config object descripbed inside index.html.
-	|\_ The first of each month contains a black band with first three characters.
-	|\_ I have disabled sundays and the days those are specified in config through 'disabledDays' Saturdays can be 
-	|	  disabled in script.js 
-	|\_ I have specified the number of days to 180 in config at 'numOfDays'
- 	 \_ UX are handled as specified in the problem statement
+		 Functionalities are discribed by comments in the file
 
 ---------------------------------------------------------------------------------------------------------------
 ###### Best viewed in `Google Chrome`
