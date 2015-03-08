@@ -8,6 +8,7 @@ var getDates = function(config){
 		var monthNumber = {"Jan": "01", "Feb":"02", "Mar":"03", "Apr":"04", "May":"05", "Jun":"06", "Jul":"07", "Aug":"08", "Sep":"09", "Oct":"10", "Nov":"11", "Dec":"12"};
 		$(".monthYearContainer", config.container).children()[0].innerHTML = config.monthName[currentDate.getMonth()] + " " + currentDate.getFullYear();
 
+		/*Assigning week Name with their specified names*/
 		for(var i=0; i<config.weekNames.length; i++){
 			$(".weekContainer", config.container).append("<td>"+ config.weekNames[i] +"</td>");
 		}
@@ -23,7 +24,8 @@ var getDates = function(config){
 		}
 
 		var tank = new Tanker();
-
+		
+		/*if Saturdays have to diabled uncomment the below comment*/
 		for(dNo=-2; dNo<=dayNo; dNo++){
 			dateInfo = new Date(2015, 0, dNo);
 			dateArray = dateInfo.toDateString().split(" ");
@@ -31,7 +33,6 @@ var getDates = function(config){
 			month = dateInfo.toDateString().split(" ")[1];
 			week = dateInfo.toDateString().split(" ")[0].slice(0,2);
 			year = dateInfo.toDateString().split(" ")[3];
-			
 			if( dateInfo < currentDate /*|| week == "Sa"*/ || week == "Su"){
 				if(date == "01"){
 					tank.weeks[week].date.push(parseInt(date)+'<span class=monthStart>'+month+'</span>');
@@ -49,14 +50,15 @@ var getDates = function(config){
 			}
 		}
 
+		/*Dynamically assigned the dates*/
 		for(var rowNo=0; rowNo<dayRows-1;rowNo++){
 			$(".tableBody", config.container).append("<tr class='rowCell'><td class='Mo "+ tank.weeks['Mo'].prop[rowNo] +"'>"+ tank.weeks['Mo'].date[rowNo] +"</td><td class='Tu "+ tank.weeks['Tu'].prop[rowNo] +"'>"+ tank.weeks['Tu'].date[rowNo] +"</td><td class='We "+ tank.weeks['We'].prop[rowNo] +"'>"+ tank.weeks['We'].date[rowNo] +"</td><td class='Th "+ tank.weeks['Th'].prop[rowNo] +"'>"+ tank.weeks['Th'].date[rowNo] +"</td><td class='Fr "+ tank.weeks['Fr'].prop[rowNo] +"'>"+ tank.weeks['Fr'].date[rowNo] +"</td><td class='Sa "+ tank.weeks['Sa'].prop[rowNo] +"'>"+ tank.weeks['Sa'].date[rowNo] +"</td><td class='Su "+ tank.weeks['Su'].prop[rowNo] +"'>"+ tank.weeks['Su'].date[rowNo] +"</td></tr>");
 		}
-		
+
+		/*Selecting the current day during the time of intialization*/		
 		$("."+scrollingTo, config.container).addClass("selectedCellColor");
 
-
-
+		/*Listens to the selection of dates*/
 		$("td", config.container).click(function(data, element){	
 			$("td", config.container).removeClass("selectedCellColor");
 			if($(data.target).hasClass("enabled")){
@@ -72,11 +74,13 @@ var getDates = function(config){
 			}
 		});
 
+		/*Event listener for the close button*/
 		$(".close").click(function(data){
 			$(".container", config.container).hide();
 			$(".bodyContainer", config.container).hide();
 		});
 
+		/*Mouse event handler*/
 		$("td")
 		.mouseenter(function(data){
 			$(data.target).addClass("mouseEnter");
@@ -87,10 +91,12 @@ var getDates = function(config){
 			$("span").removeClass("mouseEnter");
 		});
 
-			for(var i=0; i<=config.disabledDays.length; i++){
-				$("."+config.disabledDays[i], config.container).removeClass("enabled").addClass("disabled");
-			}
+		/*Disabled specified days*/
+		for(var i=0; i<=config.disabledDays.length; i++){
+			$("."+config.disabledDays[i], config.container).removeClass("enabled").addClass("disabled");
+		}
 
+		/*Scrolling to the Present/selected date*/
 		var flag=true;
 		$("."+config.inputBoxName)
 		.focusin(function(){
